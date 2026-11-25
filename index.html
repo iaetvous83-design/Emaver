@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un seul outil : le smartphone</title>
+<style>
+:root{--bg:#eef3f4;--fg:#12232b;--mut:#51666e;--card:#fff;--line:#d3dfe3;--ac:#1d4e6b;--glass:#d8ebf1;--gold:#c98a00;--ok:#1f7a4d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1b20;--fg:#e6f0f3;--mut:#9db3ba;--card:#172a31;--line:#27414a;--ac:#7cc4e0;--glass:#1b3640;--gold:#f2b632;--ok:#5fd39a}}
+:root[data-theme="dark"]{--bg:#0f1b20;--fg:#e6f0f3;--mut:#9db3ba;--card:#172a31;--line:#27414a;--ac:#7cc4e0;--glass:#1b3640;--gold:#f2b632;--ok:#5fd39a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif}
+main{max-width:1040px;margin:0 auto;padding:0 18px 48px}
+section{padding:34px 0 6px}
+h1{font:700 clamp(30px,6vw,52px)/1.08 Georgia,"Times New Roman",serif;margin:0 0 14px;letter-spacing:-.01em}
+h2{font:700 clamp(22px,4vw,30px)/1.2 Georgia,"Times New Roman",serif;margin:0 0 8px}
+h3{margin:0 0 4px;font-size:17px}
+p{margin:0 0 10px}
+.mut{color:var(--mut)}
+.hero{padding:44px 0 18px;border-bottom:1px solid var(--line)}
+.hero p{max-width:60ch;font-size:18px}
+.pill{display:inline-block;padding:3px 10px;border-radius:99px;background:var(--glass);color:var(--ac);font-size:13px;font-weight:600}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.cmp>div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.cmp .new{border-color:var(--ac);border-width:2px}
+.cmp ul{margin:6px 0 0;padding-left:18px}
+.demo{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start;margin-top:16px}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-top:14px}
+.tabs button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:99px;padding:8px 14px;font:inherit;font-size:14px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--ac);color:var(--bg);border-color:var(--ac)}
+.phone{width:280px;height:520px;margin:0 auto;border-radius:38px;border:9px solid #0d1a20;background:var(--card);box-shadow:0 0 0 2px var(--line),0 18px 40px rgba(10,30,40,.25);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.phone:before{content:"";position:absolute;top:7px;left:50%;width:70px;height:16px;margin-left:-35px;border-radius:9px;background:#0d1a20}
+.bar{margin-top:0;padding:30px 16px 10px;background:var(--ac);color:var(--bg);font-weight:600;font-size:14px}
+.scr{flex:1;display:flex;flex-direction:column;padding:18px 16px;gap:8px}
+.scr h4{margin:0;font-size:19px;line-height:1.25}
+.scr p{color:var(--mut);font-size:14.5px}
+.go{margin-top:auto;border:0;border-radius:12px;padding:13px;background:var(--gold);color:#1b1300;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer}
+.go.ghost{background:var(--glass);color:var(--ac)}
+.dots{display:flex;gap:6px;justify-content:center;padding:8px}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--ac)}
+.qr{width:84px;height:84px;margin:6px auto;border:3px solid var(--fg);border-radius:6px;background:repeating-conic-gradient(var(--fg) 0 25%,transparent 0 50%) 0 0/16px 16px}
+.out{background:var(--glass);border-radius:10px;padding:14px 16px;margin-top:12px}
+.demo>div+div h3{font-size:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card .price{font:700 20px Georgia,serif;margin:8px 0 2px}
+.card small{color:var(--mut);display:block}
+.card.focus{border:2px solid var(--gold)}
+.tag{font-size:13px;color:var(--ok);font-weight:600}
+.calc{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-top:14px}
+.calc label{display:grid;grid-template-columns:1fr auto;gap:2px 10px;margin-bottom:10px;font-size:15px}
+.calc input{grid-column:1/3;width:100%;accent-color:var(--ac)}
+.res{font:700 clamp(28px,6vw,40px)/1.1 Georgia,serif;color:var(--ac)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:12px}
+ol.steps{padding-left:20px;margin:8px 0}
+.note{font-size:13.5px;color:var(--mut);margin-top:12px}
+.arch{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin-top:14px}
+.node{background:var(--card);border:2px solid var(--ac);border-radius:10px;padding:14px}
+.ar{align-self:center;font-size:28px;color:var(--ac)}
+.later{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:12px}
+.later div{border:2px dashed var(--line);border-radius:10px;padding:12px;color:var(--mut);font-size:15px}
+.btn{display:inline-block;margin-top:4px;padding:11px 18px;border-radius:10px;background:var(--gold);color:#1b1300;font-weight:600;text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(max-width:760px){.demo{grid-template-columns:1fr}.cmp{grid-template-columns:1fr}.arch{grid-template-columns:1fr}.ar{transform:rotate(90deg);justify-self:center}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<main>
+
+<header class="hero">
+<span class="pill">Proposition de pilote</span>
+<h1>Un seul outil pour tout le monde : le smartphone.</h1>
+<p>Chaque personne capte l’information à la source, au moment où elle se produit : réception, atelier, livraison, chantier, SAV. L’IA la range, la relie et la restitue aux responsables sous forme de réponses claires. Plus de ressaisie, plus de recherche de documents.</p>
+<p><a class="btn" href="demo.html">Voir la démo du pilote</a></p>
+</header>
+
+<section>
+<h2>Du neuf, pas du vieux avec de l’IA collée dessus</h2>
+<p class="mut">Ajouter de l’IA aux processus actuels améliore un peu un système conçu pour le papier et les postes fixes. Repartir de la donnée captée sur le terrain change la manière de travailler.</p>
+<div class="cmp">
+<div><h3>Aujourd’hui</h3><ul>
+<li>Un bureau, un poste fixe et un ordinateur par administratif</li>
+<li>Bons papier, double saisie, recherche de documents</li>
+<li>Stock et situation financière connus avec retard</li>
+<li>L’IA utilisée pour rédiger plus vite, rien de plus</li></ul></div>
+<div class="new"><h3>Demain</h3><ul>
+<li>Un smartphone par personne : scan du QR, photo, voix</li>
+<li>Une donnée captée une seule fois, à la source</li>
+<li>Stock, avancement et marges visibles en temps réel</li>
+<li>Des agents IA qui synthétisent pour chaque métier</li></ul></div>
+</div>
+</section>
+
+<section>
+<h2>Voir la différence sur un smartphone</h2>
+<p class="mut">Chaque métier a son interface : le chauffeur génère et fait signer le bon de livraison, le commercial génère le devis. Choisissez un métier et avancez dans l’écran. Les données affichées sont fictives.</p>
+<div class="tabs" id="tabs" role="group" aria-label="Choisir un métier"></div>
+<noscript><p class="note">La démonstration interactive nécessite JavaScript : ouvrez cette page dans un navigateur.</p></noscript>
+<div class="demo">
+<div class="phone" aria-live="polite"><div class="bar" id="bar"></div><div class="scr" id="scr"></div></div>
+<div>
+<h3>Ce que reçoivent les responsables</h3>
+<div class="out" id="out"></div>
+<p class="note">Une même donnée, captée une fois, sert ensuite à la production, à la RH, à la comptabilité et à la direction.</p>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Toutes les interactions avec l’extérieur, au même endroit</h2>
+<p class="mut">Clients professionnels et particuliers, fournisseurs, partenaires : chaque échange déclenche une action dans l’entreprise, et chaque action informe le bon interlocuteur.</p>
+<div class="grid">
+<div class="card"><h3>Vente en ligne</h3><p>Le site accepte les commandes des professionnels et des particuliers. Faisabilité et délai sont calculés, puis l’ordre de fabrication et le QR code sont créés sans ressaisie.</p></div>
+<div class="card"><h3>Client informé en temps réel</h3><p>Fabrication en cours, départ en livraison, retard, retour SAV, facture envoyée automatiquement à la signature du bon : par SMS, e-mail ou WhatsApp, au choix du client.</p></div>
+<div class="card"><h3>Agent de messagerie</h3><p>Il écoute les boîtes e-mail désignées, avec des règles d’accès strictes. Il classe chaque message par dossier et par niveau hiérarchique, signale l’urgent et prépare des réponses à valider.</p></div>
+</div>
+</section>
+
+<section>
+<h2>Une mémoire commune, accessible selon le niveau</h2>
+<p>Tout le système d’information passe par le smartphone. Le directeur logistique écrit ou appelle un chauffeur depuis l’application, et inversement. Le directeur commercial et les commerciaux voient les messages envoyés aux clients en cas de retard ou de décalage, même par e-mail, SMS ou WhatsApp. La RH informe les salariés et reçoit leurs demandes (congés, formations, CSE). L’équipe d’encadrement échange au même endroit.</p>
+<div class="cols">
+<div class="card"><h3>Stockée et archivée</h3><p>Chaque échange est rattaché à un client, une commande ou un salarié, puis classé selon le niveau hiérarchique.</p></div>
+<div class="card"><h3>Une valeur pour l’entreprise</h3><p>L’information appartient à l’entreprise, pas à une boîte e-mail personnelle. Un commercial en vacances ne bloque plus un dossier.</p></div>
+<div class="card"><h3>Fonction RH intégrée</h3><p>Heures et paniers calculés, formations et visites obligatoires planifiées, congés, informations aux salariés.</p></div>
+</div>
+<p class="note">Point de vigilance : la géolocalisation des chauffeurs et l’analyse des e-mails exigent une information préalable des salariés, la consultation du CSE s’il existe, une charte d’usage et le respect du RGPD. Cela fait partie du cadrage du pilote et de la formation des cadres.</p>
+</section>
+
+<section>
+<h2>Faire parler le terrain : posts, pages web et référencement</h2>
+<p>Les commerciaux, livreurs, poseurs et directeurs détiennent la matière la plus précieuse : des réalisations, des questions de clients, des détails techniques. L’agent la transforme en brouillons de posts et de pages web, validés par le directeur commercial et le directeur technique. Chacun voit son travail publié, ce qui fédère les équipes.</p>
+<div class="cmp">
+<div><h3>Hier : le SEO</h3><ul><li>Le client tape une requête dans Google</li><li>Il reçoit une liste de liens et choisit</li><li>On gagne en étant bien placé dans la liste</li></ul></div>
+<div class="new"><h3>Demain : le GEO</h3><ul><li>Il demande à un assistant IA : « qui fabrique un miroir sur mesure près de chez moi ? »</li><li>L’assistant répond directement et cite quelques entreprises</li><li>On gagne en étant cité, grâce à des contenus précis, à jour et vérifiables</li></ul></div>
+</div>
+<p style="margin-top:12px">Vient ensuite le passage agentique : l’assistant ne se contente plus de répondre, il demande un devis ou passe commande pour le client. Pour être choisie, l’entreprise a besoin d’un site lisible par une machine (catalogue structuré, délais, tarifs indicatifs, formulaire de devis) et d’une réponse rapide, ce que permet l’infrastructure de terrain.</p>
+<p class="note">Les règles de citation par les assistants IA évoluent vite et aucune citation ne peut être garantie. Des contenus précis, structurés et souvent mis à jour restent la meilleure préparation.</p>
+</section>
+
+<section>
+<h2>Quatre paliers, à votre rythme</h2>
+<p class="mut">Chaque palier a sa valeur propre. On peut s’arrêter après n’importe lequel.</p>
+<div class="grid">
+<div class="card"><h3>1. Toute l’équipe</h3><p>Une journée par groupe d’une dizaine de personnes : le smartphone comme outil de travail, scanner, dicter, interroger l’IA, bonnes pratiques et confidentialité.</p><div class="price">1 500 à 1 800 € HT</div><small>par groupe, soit environ 4 500 à 5 400 € pour 3 groupes</small><span class="tag">Formation finançable OPCO selon éligibilité</span></div>
+<div class="card"><h3>2. Référents et cadres</h3><p>Trois jours (21 h) pour maîtriser Claude : projets, documents de l’entreprise, intégrations bureautiques, automatisations et plan d’action à 30, 60 et 90 jours. Animé par NOVA. Ce sont eux qui interrogent les agents, valident les contenus publiés et pilotent les droits d’accès.</p><div class="price">4 500 à 6 000 € HT</div><small>pour un groupe de 6 à 10 personnes</small><span class="tag">Organisme certifié Qualiopi</span></div>
+<div class="card focus"><h3>3. Infrastructure</h3><p>Audit et cadrage, puis pilote sur un flux (réception, atelier, livraison) avec QR codes, application smartphone, information du client à la livraison, agent de synthèse et serveur local qui garde les données chez vous.</p><div class="price">7 000 à 10 000 € HT</div><small>pilote de 6 semaines, audit compris. Serveur et matériel en plus : de l’ordre de 2 000 à 6 000 € selon le niveau d’IA hébergé en local</small></div>
+<div class="card"><h3>4. Suivi et évolution</h3><p>Maintenance, mises à jour des agents, formation des nouveaux arrivants et déploiement progressif des modules : vente en ligne, information client, RH, messagerie interne, agent e-mail, contenu et référencement GEO.</p><div class="price">500 à 900 € HT / mois</div><small>forfait de suivi. Les modules sont chiffrés après le pilote</small></div>
+</div>
+<p class="note">Tarifs indicatifs hors frais, à affiner après audit. Repères du marché en 2026 : formation IA intra-entreprise de 1 500 à 2 000 € par jour et par groupe ; consultant IA opérationnel de 600 à 900 € par jour, profil senior de 1 000 à 1 800 € (sources : Tensoria, Comparateur IA, Studeria). Le financement OPCO concerne les actions de formation, pas l’infrastructure.</p>
+</section>
+
+<section>
+<h2>Ce que cela peut rapporter</h2>
+<p class="mut">Estimation à ajuster avec vos propres chiffres. Déplacez les curseurs.</p>
+<div class="calc">
+<label><span>Personnes concernées</span><b id="vn">30</b><input type="range" id="n" min="5" max="50" step="1" value="30"></label>
+<label><span>Heures perdues par semaine et par personne (recherche de documents, ressaisie, appels)</span><b id="vh">2 h</b><input type="range" id="h" min="0.5" max="5" step="0.5" value="2"></label>
+<label><span>Coût horaire chargé moyen</span><b id="vc">32 €</b><input type="range" id="c" min="20" max="60" step="1" value="32"></label>
+<label><span>Part du temps récupérée</span><b id="vp">30 %</b><input type="range" id="p" min="10" max="60" step="5" value="30"></label>
+<div class="res" id="res"></div>
+<p class="mut" id="roi"></p>
+</div>
+<div class="cols">
+<div class="card"><h3>Conditions de travail</h3><p>Moins de papier et de ressaisie, tournées plus claires pour les chauffeurs, heures et paniers calculés sans litige.</p></div>
+<div class="card"><h3>Moins de frictions</h3><p>Une question posée en langage naturel remplace la recherche dans les dossiers : « où en est la commande ? », « que reste-t-il en stock ? ».</p></div>
+<div class="card"><h3>Décisions plus rapides</h3><p>Stock, avancement de fabrication et situation financière disponibles en temps réel pour la direction.</p></div>
+</div>
+</section>
+
+<section>
+<h2>Ce que nous proposons : un pilote de 6 semaines</h2>
+<p>Le pilote prouve l’idée sur une seule chaîne, de la réception à la facture, avec de vraies commandes. L’architecture complète vient ensuite, module par module.</p>
+<p><a class="btn" href="demo.html">Voir la démo de bout en bout</a> <span class="mut">(à ouvrir sur un smartphone, comme l’application)</span></p>
+<ol class="steps">
+<li><b>Semaines 1 et 2 :</b> audit sur le terrain et choix d’un flux, par exemple de l’entrée des marchandises à la livraison.</li>
+<li><b>Semaines 3 à 5 :</b> mise en place des QR codes, de l’application smartphone, de l’information des clients à la livraison et de l’agent de synthèse, avec une équipe volontaire formée (palier 1 sur un groupe).</li>
+<li><b>Semaine 6 :</b> bilan chiffré : temps gagné, erreurs évitées, appels clients « où est ma livraison ? » évités, adoption. Décision d’étendre ou non.</li>
+</ol>
+<div class="cols">
+<div class="card"><h3>Vos données restent chez vous</h3><p>Un serveur local héberge les données et les agents. Le choix entre IA locale et service cloud européen se fait ensemble.</p></div>
+<div class="card"><h3>Qui fait quoi</h3><p>Architecture, serveur et agents : moi. Formation, certification Qualiopi et dossier OPCO : NOVA.</p></div>
+<div class="card"><h3>Le client informé pour sa livraison</h3><p>Créneau confirmé la veille, message au départ du camion, nouvelle heure d’arrivée en cas de retard, bon signé et facture envoyés à la fin. Le client choisit son canal (SMS, e-mail ou WhatsApp) et peut refuser les messages.</p></div>
+</div>
+<h3 style="margin-top:22px">L’architecture du pilote, en trois blocs</h3>
+<p class="mut">On construit uniquement ce qui est nécessaire à cette chaîne. Le reste se branche ensuite sur le même socle.</p>
+<div class="arch">
+<div class="node"><h3>Terrain</h3><p class="mut" style="margin:0">Smartphones du magasinier, de l’atelier, du chauffeur et du commercial. QR codes sur palettes et pièces.</p></div>
+<span class="ar" aria-hidden="true">›</span>
+<div class="node"><h3>Socle de données</h3><p class="mut" style="margin:0">Serveur local : commandes, QR codes, bons, messages, droits d’accès par niveau hiérarchique.</p></div>
+<span class="ar" aria-hidden="true">›</span>
+<div class="node"><h3>Restitution</h3><p class="mut" style="margin:0">Messages automatiques aux clients, agent de synthèse pour la direction, export vers la comptabilité.</p></div>
+</div>
+<div class="later">
+<div>Après le pilote : fonction RH</div>
+<div>Après le pilote : agent de messagerie</div>
+<div>Après le pilote : vente en ligne</div>
+<div>Après le pilote : contenu et référencement GEO</div>
+</div>
+<h3 style="margin-top:22px">À décider avant de construire</h3>
+<div class="cols">
+<div class="card"><h3>Le schéma des données</h3><p>Commande, ordre de fabrication, QR code, bon de livraison, messages : une page suffit, mais elle évite de refaire le pilote.</p></div>
+<div class="card"><h3>Les droits d’accès</h3><p>Qui voit quoi, selon le niveau hiérarchique, avant toute donnée réelle.</p></div>
+<div class="card"><h3>IA locale ou cloud européen</h3><p>Ce choix oriente l’achat du serveur et le coût du pilote.</p></div>
+<div class="card"><h3>Le cadre RGPD et CSE</h3><p>Information des salariés, consultation du CSE s’il existe, consentement des clients pour les SMS et messages.</p></div>
+</div>
+</section>
+
+<p class="note">Simulation à titre d’illustration : données fictives, tarifs indicatifs HT, économies non garanties.</p>
+</main>
+
+<script>
+const S=[
+{k:"Réception",w:"Magasinier",o:"Le stock est à jour en temps réel pour la direction et l’atelier, sans fiche papier ni ressaisie.",s:[["Scanner la palette","Pointez le QR collé sur la palette à l’arrivée du camion.","Scanner",1],["Vitrage 44.2 · 3210×2250","Commande n° 2411 · 12 pièces · fournisseur reconnu.","Conforme"],["✔ Enregistré","Stock mis à jour. Emplacement B4 proposé."]]},
+{k:"Atelier",w:"Opérateur",o:"Le directeur technique voit l’avancement de chaque ordre de fabrication. Fini les « où en est la commande ? ».",s:[["Scanner la pièce","QR collé sur le verre, ordre de fabrication 1187.","Scanner",1],["Découpe terminée ?","Choisir l’étape : découpe, façonnage, trempe, assemblage.","Terminer l’étape"],["✔ Étape enregistrée","Prochaine étape : trempe. Aucun retard détecté."]]},
+{k:"Livraison",w:"Chauffeur",o:"Le chauffeur génère et fait signer le bon de livraison sur son écran, sans papier. La RH reçoit heures et paniers prêts à intégrer, et le client est prévenu.",s:[["Tournée du jour","6 livraisons. Camion 12. Départ enregistré à 7 h 42.","Démarrer"],["Bon de livraison généré","Le bon est créé à partir de la commande : articles, quantités, QR scannés au chargement. Le client le vérifie sur l’écran.","Faire signer"],["Signature du client","Le client signe sur l’écran avec le doigt.","Valider la signature"],["✔ Bon signé","PDF envoyé au client par e-mail. Feuille d’heures à valider avec votre code."]]},
+{k:"Commercial",w:"Commercial terrain",o:"Le commercial génère le devis sur place, avec dimensions, références et marge calculées, plans compris. Une fois accepté, le devis devient commande puis ordre de fabrication.",s:[["Dicter la demande","« Garde-corps en verre, 14 mètres, chez M. Martin, pose en janvier. »","Dicter"],["Devis généré","Dimensions et références extraites. Marge calculée. Le client le relit sur l’écran ou le reçoit par e-mail.","Envoyer le devis"],["✔ Devis envoyé","Le directeur commercial est informé. À l’acceptation, le devis devient commande."]]},
+{k:"SAV",w:"Technicien SAV",o:"Historique complet de chaque vitrage, du devis à la pose : le SAV répond sans rappeler trois services.",s:[["Scanner la vitre","QR collé au montage, lisible des années après.","Scanner",1],["Historique complet","Fabriquée en mars, posée par l’équipe 2, garantie 10 ans.","Créer le ticket"],["✔ Ticket créé","Photo jointe. Pièce commandée, client informé."]]},
+{k:"Site web",w:"Site web · client",o:"La commande en ligne, d’un professionnel ou d’un particulier, devient directement un ordre de fabrication, sans ressaisie. Le commercial et le directeur technique sont alertés si une cote ou un délai pose question.",s:[["Commande en ligne","Mme Durand configure un miroir sur mesure : 120×80 cm, bords polis. Elle paie un acompte.","Valider"],["Contrôle automatique","Faisabilité vérifiée. Délai calculé d’après la charge de l’atelier.","Lancer la fabrication"],["✔ Ordre créé","Ordre de fabrication et QR code créés. La cliente reçoit sa confirmation."]]},
+{k:"Client",w:"Client · particulier ou pro",o:"Le client est informé sans avoir à appeler : fabrication, départ en livraison, retard, retour SAV, facture. Le commercial voit tout ce qui a été envoyé, par SMS, e-mail ou WhatsApp.",s:[["Votre commande avance","« Votre vitrage est en trempe. Livraison prévue jeudi matin. »","Message suivant"],["Départ en livraison","« Le chauffeur est parti à 7 h 42. Retard de 40 minutes : arrivée prévue à 10 h 20. »","Message suivant"],["✔ Facture envoyée","Facture créée automatiquement à la signature du bon de livraison. Un lien permet de signaler un problème avec photo (retour SAV)."]]},
+{k:"Messagerie",w:"Messagerie interne",o:"Tout passe par le smartphone : le directeur commercial et les commerciaux voient les messages envoyés aux clients, quel que soit le canal. Rien ne reste enfermé dans une boîte personnelle.",s:[["Le directeur logistique écrit","« Camion 12 : 40 minutes de retard sur la tournée. »","Envoyer"],["Les bonnes personnes sont informées","Le chauffeur reçoit l’alerte. Le client est prévenu. Le commercial du dossier et le directeur commercial voient le message et le fil de discussion.","Voir l’archive"],["✔ Archivé","Message classé au dossier du client, accessible selon le niveau hiérarchique. Si le commercial est en congé, un collègue retrouve tout."]]},
+{k:"RH",w:"Salarié · RH",o:"Heures et paniers calculés sans ressaisie, formations et visites obligatoires planifiées, congés traités. La RH informe les salariés et ils répondent au même endroit.",s:[["Mon espace","Heures de la semaine : 38 h 30. Paniers : 4. Visite médicale à planifier avant le 15 janvier.","Demander un congé"],["Demande de congé","Du 22 au 26 décembre. La RH et le responsable sont notifiés. Alerte si l’atelier manque de monde.","Envoyer"],["✔ Demande transmise","La réponse arrive sur le smartphone. Le planning se met à jour après validation."]]},
+{k:"Contenu",w:"Livreur · poseur",o:"Le terrain alimente le site et les réseaux : l’agent rédige, le directeur commercial valide, le directeur technique vérifie les détails. Chacun voit sa contribution publiée.",s:[["Photo de la pose","Le livreur photographie une douche à l’italienne posée et dicte : « Verre 10 mm, pose chez un particulier. »","Envoyer"],["Brouillon de publication","Post pour les réseaux et page « réalisation » rédigés, avec légende et mots-clés.","Soumettre"],["✔ En attente de validation","Le directeur commercial et le directeur technique reçoivent le brouillon. Publication sur le site et les réseaux après accord."]]},
+{k:"Direction",w:"Directeur général",o:"Une question posée en langage naturel remplace trois tableaux et deux appels.",s:[["Posez votre question","« Quelles commandes sont en retard et pourquoi ? »","Demander"],["Synthèse","3 commandes en retard. Cause principale : file d’attente à la trempe. Marge de la semaine : conforme au budget.","Voir le détail"],["✔ Détail envoyé","Liste par client, avec date de livraison recalculée."]]}
+];
+let a=0,i=0;
+const $=id=>document.getElementById(id);
+function tabs(){$("tabs").innerHTML=S.map((x,j)=>`<button aria-pressed="${j===a}" onclick="pick(${j})">${x.k}</button>`).join("")}
+function draw(){
+ const sc=S[a],s=sc.s[i],last=i===sc.s.length-1;
+ $("bar").textContent=sc.w;
+ $("scr").innerHTML=`<h4>${s[0]}</h4>${s[3]?'<div class="qr" aria-hidden="true"></div>':''}<p>${s[1]}</p>`+
+ (last?`<button class="go ghost" onclick="rs()">Rejouer ↻</button>`:`<button class="go" onclick="nx()">${s[2]}</button>`)+
+ `<div class="dots">${sc.s.map((_,j)=>`<i class="${j===i?'on':''}"></i>`).join("")}</div>`;
+ $("out").textContent=sc.o;
+}
+function pick(j){a=j;i=0;tabs();draw()}
+function nx(){i++;draw()}
+function rs(){i=0;draw()}
+function calc(){
+ const n=+$("n").value,h=+$("h").value,c=+$("c").value,p=+$("p").value;
+ $("vn").textContent=n;$("vh").textContent=String(h).replace(".",",")+" h";$("vc").textContent=c+" €";$("vp").textContent=p+" %";
+ const y=Math.round(n*h*c*45*p/100/100)*100;
+ $("res").textContent=y.toLocaleString("fr-FR")+" € par an";
+ const m=Math.max(1,Math.round(8500/(y/12)));
+ $("roi").textContent="Soit environ "+Math.round(y/12).toLocaleString("fr-FR")+" € par mois, calculés sur 45 semaines travaillées. Le pilote (7 000 à 10 000 €) serait amorti en "+m+" mois environ dans ce scénario.";
+}
+["n","h","c","p"].forEach(k=>$(k).addEventListener("input",calc));
+tabs();draw();calc();
+</script>
+</body>
+</html>
